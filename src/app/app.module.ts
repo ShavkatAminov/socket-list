@@ -6,11 +6,13 @@ import { InputComponent } from './components/input/input.component';
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { ArrayInputComponent } from './components/array-input/array-input.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InputComponent
+    InputComponent,
+    ArrayInputComponent
   ],
   imports: [
     BrowserModule,
