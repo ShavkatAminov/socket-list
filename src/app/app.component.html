@@ -22,12 +22,21 @@
       </tr>
       </thead>
       <tbody>
-      <tr class="border">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+      <tr *ngFor="let item of list" class="border text-center">
+        <td>{{item.id}}</td>
+        <td>{{item.int_val}}</td>
+        <td>{{item.float_val}}</td>
+        <td>
+          <button [ngClass]="'bg-' + item.color">{{item.color}}</button>
+        </td>
+        <td>
+          <div class="border">
+            <div>{{item.child.id}}</div>
+            <div>
+              <button [ngClass]="'bg-' + item.child.color">{{item.child.color}}</button>
+            </div>
+          </div>
+        </td>
       </tr>
       </tbody>
     </table>

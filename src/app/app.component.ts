@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
+import {Item} from "./classess/Item";
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,16 @@ export class AppComponent implements OnInit{
     timer: new FormControl(300),
     size: new FormControl(1000),
     extraIds: new FormControl([100, 102, 105]),
-  })
+  });
+
+  list: Item[] = [];
+
+
 
   ngOnInit(): void {
-    this.parameters.valueChanges.subscribe(res => {});
+    this.parameters.valueChanges.subscribe((res: any) => {
+
+    });
     this.setWorker();
   }
 
@@ -23,7 +30,7 @@ export class AppComponent implements OnInit{
       // Create a new
       const worker = new Worker(new URL('./workers/worker.worker', import.meta.url));
       worker.onmessage = ({ data }) => {
-        console.log(data);
+        this.list = data.slice(data.length - 10, data.length);
       };
       worker.postMessage('');
     } else {
