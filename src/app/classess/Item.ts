@@ -1,4 +1,4 @@
-import {colors} from "../enum/colors";
+import {colors} from "../consts/colors";
 import {getRandomInt, getRandomNumber} from "../utils/random";
 
 

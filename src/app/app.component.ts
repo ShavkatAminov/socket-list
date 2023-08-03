@@ -11,8 +11,10 @@ export class AppComponent implements OnInit{
   parameters: FormGroup = new FormGroup({
     timer: new FormControl(300),
     size: new FormControl(1000),
-    extraIds: new FormControl([100, 102, 105]),
   });
+
+  intervalId: any = null;
+  extraIds = new FormControl();
 
   list: Item[] = [];
 
@@ -20,22 +22,24 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.parameters.valueChanges.subscribe((res: any) => {
-
+      this.setWorker(res);
     });
-    this.setWorker();
+    this.setWorker(this.parameters.value);
   }
 
-  setWorker() {
+  setWorker(data: any) {
     if (typeof Worker !== 'undefined') {
-      // Create a new
       const worker = new Worker(new URL('./workers/worker.worker', import.meta.url));
       worker.onmessage = ({ data }) => {
         this.list = data.slice(data.length - 10, data.length);
       };
-      worker.postMessage('');
-    } else {
-      // Web Workers are not supported in this environment.
-      // You should add a fallback so that your program still executes correctly.
+      if(this.intervalId) {
+        clearInterval(this.intervalId);
+      }
+      this.intervalId = setInterval(() => {
+        worker.postMessage(data.size);
+      }, data.timer);
+      worker.postMessage(data.size);
     }
   }
 
