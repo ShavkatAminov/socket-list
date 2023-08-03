@@ -2,6 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import {AppModule} from "./app.module";
 import {InputComponent} from "./components/input/input.component";
+import {Item} from "./classess/Item";
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -39,7 +40,8 @@ describe('AppComponent', () => {
 
   it('should have been call setExtraIDs', () => {
     spyOn(component, 'setExtraIDs');
-    component.ngOnInit();
+    component.list.push(new Item(10));
+    component.extraIds.patchValue([500]);
     expect(component.setExtraIDs).toHaveBeenCalledWith(component.extraIds.value);
   });
 });
