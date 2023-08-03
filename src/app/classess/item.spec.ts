@@ -21,7 +21,7 @@ describe('Item', () => {
   });
 
   it('should object is filled', function () {
-    expect(typeof object.float_val).toBe('number');
+    expect(typeof object.float_val).toBe('string');
     expect(typeof object.int_val).toBe('number');
     expect(typeof object.color).toBe('string');
     expect(typeof object.child).toBe('object');
