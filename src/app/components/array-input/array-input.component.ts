@@ -19,7 +19,15 @@ export class ArrayInputComponent extends InputComponent{
 
   override ngOnInit(): void {
     this.control.valueChanges.subscribe(res => {
-      this.onChange(res.split(','));
+      let result = res.split(',');
+      let value: number[] = [];
+      result.forEach((item: any) => {
+        let val = parseInt(item);
+        if(val) {
+          value.push(val);
+        }
+      })
+      this.onChange(value);
     })
   }
 }

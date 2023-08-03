@@ -9,12 +9,12 @@ import {Item} from "./classess/Item";
 })
 export class AppComponent implements OnInit{
   parameters: FormGroup = new FormGroup({
-    timer: new FormControl(300),
+    timer: new FormControl(3000),
     size: new FormControl(1000),
   });
 
   intervalId: any = null;
-  extraIds = new FormControl();
+  extraIds: FormControl = new FormControl([]);
 
   list: Item[] = [];
 
@@ -24,7 +24,18 @@ export class AppComponent implements OnInit{
     this.parameters.valueChanges.subscribe((res: any) => {
       this.setWorker(res);
     });
+    this.extraIds.valueChanges.subscribe(res => {
+      this.setExtraIDs(res);
+    })
     this.setWorker(this.parameters.value);
+  }
+
+  setExtraIDs(ids: number[]) {
+    if(ids) {
+      for(let i: number = 0; i < ids.length; i ++) {
+        this.list[i].id = ids[i];
+      }
+    }
   }
 
   setWorker(data: any) {
@@ -32,6 +43,7 @@ export class AppComponent implements OnInit{
       const worker = new Worker(new URL('./workers/worker.worker', import.meta.url));
       worker.onmessage = ({ data }) => {
         this.list = data.slice(data.length - 10, data.length);
+        this.setExtraIDs(this.extraIds.value);
       };
       if(this.intervalId) {
         clearInterval(this.intervalId);

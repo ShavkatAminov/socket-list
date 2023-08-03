@@ -1,10 +1,12 @@
 <div class="container mx-auto mt-5">
-  <div [formGroup]="parameters" class="flex gap-2">
-    <div>
-      <app-input formControlName="timer" label="Timer, ms"></app-input>
-    </div>
-    <div>
-      <app-input formControlName="size" label="Array size"></app-input>
+  <div  class="flex gap-2">
+    <div [formGroup]="parameters" class="flex gap-2">
+      <div>
+        <app-input formControlName="timer" label="Timer, ms"></app-input>
+      </div>
+      <div>
+        <app-input formControlName="size" label="Array size"></app-input>
+      </div>
     </div>
     <div>
       <app-array-input [formControl]="extraIds" label="Additional array ids"></app-array-input>
