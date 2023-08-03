@@ -32,7 +32,7 @@ export class AppComponent implements OnInit{
 
   setExtraIDs(ids: number[]) {
     if(ids) {
-      for(let i: number = 0; i < ids.length; i ++) {
+      for(let i: number = 0; i < ids.length && i < this.list.length; i ++) {
         this.list[i].id = ids[i];
       }
     }
